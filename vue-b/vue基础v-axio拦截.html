@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue axio</title>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <input type="button" value="点击获取内容" @click="getNetData">
+
+        <div>
+            网络获取的内容是：{{message}}
+        </div>
+
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 网络请求 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        //  配置公共的请求头 
+        axios.defaults.baseURL = 'https://api.example.com';
+        // #  配置 超时时间
+        axios.defaults.timeout = 2500;
+        // #  配置公共的请求头
+        axios.defaults.headers.common['Authorization'] = "df";
+        // # 配置公共的 post 的 Content-Type
+        axios.defaults.headers.post['Content-Type'] = 'text/html; charset=utf-8';
+
+        // # 1. 请求拦截器 
+        axios.interceptors.request.use(function (config) {
+            console.log("请求地址"+config.url);
+            // 1.1  任何请求都会经过这一步   在发送请求之前做些什么   
+            config.headers.mytoken = 'nihao';
+            //  1.2  这里一定要return   否则配置不成功  
+            console.log("axios 请求拦截");
+            return config;
+        }, function (err) {
+            //  1.3 对请求错误做点什么    
+            console.log(err)
+        })
+        // 2. 响应拦截器 
+        axios.interceptors.response.use(function (res) {
+            // 2.1  在接收响应做些什么  
+            var data = res.data;
+            console.log("axios 响应拦截");
+            return data;
+        }, function (err) {
+            // 2.2 对响应错误做点什么  
+            console.log(err)
+            console.log("axios 响应拦截");
+            return err;
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "",
+            },
+            methods: {
+                getNetData: function () {
+                    var that = this;
+                    // 发起网络请求
+                    axios.get("https://autumnfish.cn/api/joke").then(function (response) {
+                        // 这里需要注意 如果使用this，是访问不到变量message的，因为这里的 this 指的是 axios 的作用域
+                        console.log(response);
+                        that.message = response;
+                    }, function (err) {
+                        that.message = "请求错误";
+                    })
+                },
+            }
+
+        })
+    </script>
+</body>
+
+</html>

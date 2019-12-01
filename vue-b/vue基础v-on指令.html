@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-on指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 直接引用 -->
+        <h3 v-on:click="login"> 登录</h3>
+        <h3 v-on:monseenter="login2"> 第二次登录</h3>
+        <h3 v-on:dblclick="login3"> 第三登录</h3>
+       
+
+        <!-- 简写方式 -->
+        <!-- 用 @ 来替换 v-on: 达到简写方式 -->
+        <h3 @click="login"> 登录</h3>
+        <h3 @monseenter="login2"> 第二次登录</h3>
+        <h3 @dblclick="login3"> 第三登录</h3>
+       
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                login:function(){
+                        alert("测试");
+                },
+                login2:function(){
+
+                },
+                login3:function(){
+                    
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

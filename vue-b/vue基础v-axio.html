@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue axio</title>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <input type="button" value="点击获取内容" @click="getNetData">
+        <input type="button" value="点击获取3条数据" @click="getNetData2">
+        <input type="button" value="点击发起post请求" @click="postNetData">
+        <div>
+            网络获取的内容是：{{message}}
+        </div>
+        <ul>
+            <li v-for="(item,index) in mesArr">
+                {{ index }} : {{ item }}
+            </li>
+        </ul>
+
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 网络请求 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "",
+                mesArr: [],
+            },
+            methods: {
+                getNetData: function () {
+                    var that = this;
+                    // 发起网络请求
+                    axios.get("https://autumnfish.cn/api/joke").then(function (response) {
+                        // 这里需要注意 如果使用this，是访问不到变量message的，因为这里的 this 指的是 axios 的作用域
+                        that.message = response.data;
+                    }, function (err) {
+                        that.message = "请求错误";
+                    })
+                },
+                getNetData2: function () {
+                    var that = this;
+                    // 发起网络请求
+                    axios.get("https://autumnfish.cn/api/joke/list?num=3").then(function (response) {
+                        // 这里需要注意 如果使用this，是访问不到变量message的，因为这里的 this 指的是 axios 的作用域
+                        console.log(response);
+                        that.message = response.data.msg;
+                        that.mesArr = response.data.jokes;
+                    }, function (err) {
+                        that.message = "请求错误";
+                    })
+                },
+                postNetData: function () {
+                    var that = this;
+                    // 发起网络请求
+                    axios.post("https://autumnfish.cn/api/user/reg", { "username": "张三" }).then(function (response) {
+                        // 这里需要注意 如果使用this，是访问不到变量message的，因为这里的 this 指的是 axios 的作用域
+                        console.log(response);
+                        that.message = response.data;
+                    }, function (err) {
+                        that.message = "请求错误";
+                    })
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

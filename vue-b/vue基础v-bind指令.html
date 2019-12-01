@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-bind指令</title>
+    <style>
+    .active{
+        border: 1px solid red;
+        margin: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+       
+        <div @click="show" v-bind:class="isActivity?'active':''">
+            这里是显示的文本啊
+        </div >
+
+        <!-- 第二种写法 -->
+        <div @click="show" v-bind:class="{active:isActivity}">
+                这里是显示的文本啊
+         </div >
+
+         <!-- 简写方式 -->
+         <div @click="show" :class="{active:isActivity}">
+                这里是显示的文本啊
+         </div >
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                isActivity: true,
+            },
+            methods: {
+                show:function(){
+                    this.isActivity = !this.isActivity;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-text指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 直接引用 -->
+        <h3 v-text="message"></h3>
+        <!-- 拼接一点数据 -->
+        <h3 v-text="message+'这里是拼接的数据'"></h3>
+        <h3>差值表达式引用 {{message}}</h3>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "hellow world"
+            }
+        })
+    </script>
+</body>
+
+</html>

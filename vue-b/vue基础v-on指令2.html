@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-on指令</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <h3 v-on:click="updateText"> 点击修改文本</h3>
+
+        <p> 这里是显示的文本 {{message}} </p>
+
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "哈哈 我的一个小疯子"
+            },
+            methods: {
+                updateText: function () {
+
+                    // 在这里通过 this 关键字来引用 data 中定义的变量关键字
+                    this.message = "这里是更新后显示的文本";
+                },
+
+            },
+        })
+    </script>
+</body>
+
+</html>

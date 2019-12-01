@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-for指令</title>
+    <style>
+        .active {
+            border: 1px solid red;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="active">
+            vue v-for指令
+        </div>
+
+
+        <ul>
+            <!-- item 是从数组中取出来的元素 可自定义名称 -->
+            <!-- in 是关键字不可修改 -->
+            <!-- indexArr 是 vue 中定义的数组 -->
+            <li v-for="item in indexArr">
+                {{item}} : 在这里实现
+            </li>
+        </ul>
+
+
+        <ul>
+            <!-- item 是从数组中取出来的元素 可自定义名称 -->
+            <!-- index 是 for 循环中的索引角标 从0开发 可自定义名称-->
+            <!-- in 是关键字不可修改 -->
+            <!-- objectArr 是 vue 中定义的数组 -->
+            <li v-for="(item,index) in objectArr">
+                序号 {{index}} : 姓名{{ item.name }} 年龄{{item.age}}
+            </li>
+        </ul>
+
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                indexArr: [1, 2, 3, 4],
+                // 对象数据类型
+                objectArr: [
+                    { name: "张三", age: 12 },
+                    { name: "李四", age: 18 },
+                    { name: "王五", age: 22 },
+                ],
+            },
+
+        })
+    </script>
+</body>
+
+</html>

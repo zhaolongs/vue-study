@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue v-text指令</title>
+</head>
+
+<body>
+    <div id="app">
+    <button @click="sub" >-</button>
+    {{ count }}
+    <button @click="add">+</button>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count:1,
+            },
+            methods: {
+              add:function(){
+                  if(this.count<10){
+                      this.count++;
+                  }else{
+                      alert("不可以大于10");
+                  }
+              },
+              sub:function(){
+                  if(this.count>0){
+                      this.count--;
+                  }else{
+                      alert("不可小于0");
+                  }
+              }  
+            },
+        })
+    </script>
+</body>
+
+</html>
